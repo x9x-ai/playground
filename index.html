@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Love ASCII Show</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Fredoka', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    pre { font-family: 'Roboto Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-rose-800 via-fuchsia-700 to-purple-800 text-white">
+  <div class="max-w-5xl mx-auto py-8 px-4">
+    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <p class="text-sm uppercase tracking-widest text-rose-200">Love ASCII Show</p>
+        <h1 class="text-4xl font-semibold">Share the love with ASCII + music</h1>
+        <p class="text-rose-100 max-w-2xl mt-1">Animate love-themed ASCII art with gentle motion, sparkles, and music. Provide ASCII and tracks via query params or config.json, or just press Start to use the defaults.</p>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <button id="startBtn" class="px-4 py-2 rounded-lg bg-rose-500 hover:bg-rose-600 text-white font-semibold shadow-lg shadow-rose-900/40 transition">Start</button>
+        <button id="stopBtn" class="px-4 py-2 rounded-lg bg-white/15 hover:bg-white/25 text-white font-semibold transition">Stop</button>
+      </div>
+    </header>
+
+    <section class="mt-6 grid lg:grid-cols-3 gap-6">
+      <div class="lg:col-span-2 bg-white/10 border border-white/15 rounded-2xl p-4 shadow-xl shadow-rose-900/30 backdrop-blur">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2 text-sm text-rose-50/80">
+            <span class="inline-flex h-3 w-3 rounded-full bg-rose-300 animate-pulse"></span>
+            <span id="statusText">Waiting to start…</span>
+          </div>
+          <div class="text-sm font-semibold text-white/90">Countdown: <span id="countdown">60</span>s</div>
+        </div>
+        <div class="mt-4 relative">
+          <pre id="asciiDisplay" class="min-h-[360px] text-lg leading-tight whitespace-pre overflow-hidden bg-black/40 rounded-xl p-4 border border-white/10 shadow-inner shadow-black/40"></pre>
+          <div id="overlayEffect" class="pointer-events-none absolute inset-0"></div>
+          <div class="absolute top-2 right-3 text-xs text-white/70 bg-black/30 rounded-full px-3 py-1 border border-white/10" id="transitionLabel">Wavey</div>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <div class="bg-white/10 border border-white/15 rounded-2xl p-4 shadow-xl shadow-rose-900/30 backdrop-blur">
+          <h2 class="text-xl font-semibold mb-2">Music</h2>
+          <div class="text-sm text-white/80 mb-2" id="trackInfo">No track</div>
+          <div class="flex gap-2 mb-3">
+            <button id="prevTrack" class="flex-1 px-3 py-2 rounded-lg bg-white/15 hover:bg-white/25">Prev</button>
+            <button id="nextTrack" class="flex-1 px-3 py-2 rounded-lg bg-white/15 hover:bg-white/25">Next</button>
+          </div>
+          <div class="h-1 rounded-full bg-white/15 overflow-hidden"><div id="progressBar" class="h-full w-0 bg-gradient-to-r from-rose-300 to-fuchsia-400"></div></div>
+          <div class="text-xs text-white/70 mt-2" id="musicStatus"></div>
+        </div>
+
+        <div class="bg-white/10 border border-white/15 rounded-2xl p-4 shadow-xl shadow-rose-900/30 backdrop-blur space-y-2">
+          <h2 class="text-lg font-semibold">Quick inputs</h2>
+          <label class="text-sm text-white/80">ASCII file (local)
+            <input type="file" id="asciiFileInput" accept=".txt" class="mt-1 w-full text-sm text-white/80 bg-white/10 rounded px-2 py-1" />
+          </label>
+          <label class="text-sm text-white/80">Audio file (local)
+            <input type="file" id="audioFileInput" accept="audio/*" class="mt-1 w-full text-sm text-white/80 bg-white/10 rounded px-2 py-1" />
+          </label>
+          <p class="text-xs text-rose-100/80">Tip: Use query params like <code class="bg-black/30 px-1 rounded">?asciiSrc=assets/ascii/heart.txt&playlist=track1.mp3,track2.mp3</code>.</p>
+        </div>
+
+        <div class="bg-white/5 border border-white/15 rounded-2xl p-4 text-xs text-rose-50/80 space-y-1">
+          <p><strong>Config sources (priority):</strong> Query params &gt; local file pickers &gt; config.json defaults.</p>
+          <p><strong>ASCII markers:</strong> Split frames with <code>-----FRAME-----</code>.</p>
+          <p><strong>Music:</strong> Playlist supports relative paths or URLs. Autoplay requires Start click.</p>
+          <p><strong>Fallback:</strong> Animation keeps running even if audio fails.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>

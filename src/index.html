@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Love ASCII Show</title>
+  <!--INLINE_STYLES-->
+</head>
+<body class="bg-surface text-rose-50">
+  <div class="app-shell">
+    <header class="flex-between gap-3">
+      <div class="title-row">
+        <div class="pill">Offline-ready</div>
+        <h1 class="title">Love ASCII Show</h1>
+      </div>
+      <div class="controls">
+        <button id="startBtn" class="btn">Start</button>
+        <button id="stopBtn" class="btn ghost" disabled>Stop</button>
+        <button id="nextBtn" class="btn ghost">Next art</button>
+        <label class="toggle">
+          <input id="rotateToggle" type="checkbox" checked />
+          <span>Auto-rotate</span>
+        </label>
+      </div>
+    </header>
+
+    <div class="grid">
+      <section class="panel display" id="dropZone">
+        <div class="overlay">
+          <div class="badge">ASCII source: <span id="asciiSource">Embedded</span></div>
+          <div class="badge">Music source: <span id="musicSource">Synth</span></div>
+          <div class="badge">Countdown: <span id="countdown">60s</span></div>
+        </div>
+        <pre id="ascii" aria-label="ASCII art display"></pre>
+      </section>
+
+      <section class="panel">
+        <h2 class="section-title">Controls & status</h2>
+        <div class="stack">
+          <div class="row">
+            <div>
+              <div class="label">Playback</div>
+              <div id="playbackState" class="muted">Stopped</div>
+            </div>
+            <div class="vol">
+              <button id="muteBtn" class="btn tiny ghost">Mute</button>
+              <input id="volume" type="range" min="0" max="1" step="0.01" value="0.7" />
+            </div>
+          </div>
+          <div class="row chips" id="chips"></div>
+          <div class="row inputs">
+            <label class="file">
+              <span>Pick ASCII (.txt)</span>
+              <input id="asciiPicker" type="file" accept=".txt" />
+            </label>
+            <label class="file">
+              <span>Pick music (audio)</span>
+              <input id="musicPicker" type="file" accept="audio/*" />
+            </label>
+          </div>
+          <div class="row">
+            <div>
+              <div class="label">ASCII detail</div>
+              <div id="asciiDetail" class="muted">Embedded defaults</div>
+            </div>
+            <div>
+              <div class="label">Music detail</div>
+              <div id="musicDetail" class="muted">Synth pad</div>
+            </div>
+          </div>
+          <div class="row wrap">
+            <button id="prevTrack" class="btn tiny ghost">Prev</button>
+            <button id="nextTrack" class="btn tiny ghost">Next</button>
+            <label class="toggle">
+              <input id="loopToggle" type="checkbox" checked />
+              <span>Loop playlist</span>
+            </label>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="panel">
+      <h2 class="section-title">Errors & tips</h2>
+      <div id="errors" class="errors"></div>
+      <ul class="tips">
+        <li>Drag & drop ASCII (.txt) or audio files anywhere to load them (file:// safe).</li>
+        <li>Remote URLs may fail due to CORS when opened via file://; serve over HTTP for URL loading.</li>
+        <li>Keyboard: Space = Start/Stop, N = Next art, M = Mute.</li>
+      </ul>
+    </section>
+  </div>
+
+  <!--INLINE_SCRIPT-->
+</body>
+</html>

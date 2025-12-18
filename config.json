@@ -1,0 +1,10 @@
+{
+  "seconds": 90,
+  "asciiDir": "assets/ascii",
+  "playlist": [
+    "https://archive.org/download/love_202310/love_song_1.mp3",
+    "https://archive.org/download/love_202310/love_song_2.mp3",
+    "https://archive.org/download/love_202310/love_song_3.mp3"
+  ],
+  "theme": "love"
+}
